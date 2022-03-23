@@ -92,13 +92,34 @@ struct ContentView: View {
     
     func calculateResults() -> String {
         
-        var input = userInput.replacingOccurrences(of: "%", with: "*0.01")
-        input = userInput.replacingOccurrences(of: "X", with: "*")
+        if validInput() {
+            
+            var input = userInput.replacingOccurrences(of: "%", with: "*0.01")
+            input = userInput.replacingOccurrences(of: "X", with: "*")
+            
+            let expression = NSExpression(format: input)
+            let result = expression.expressionValue(with: nil, context: nil) as! Double
+            return formatResult(value: result)
+        }
+        return ""
+
+    }
+    
+    func validInput() -> Bool {
+        if (result.isEmpty) {
+            return false
+        }
+        else {
+            return true
+        }
         
-        let expression = NSExpression(format: input)
-        let result = expression.expressionValue(with: nil, context: nil) as! Double
-        return formatResult(value: result)
+        let last = String(userInput.last!)
         
+        if (operators.contains(last)) || last == "-" {
+            if (last != "%" || userInput.count == 1) {
+                return true
+            }
+        }
     }
     
     func formatResult(value: Double) -> String {
@@ -114,4 +135,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
         }
     }
+    
+    
 }
