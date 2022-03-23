@@ -22,6 +22,7 @@ struct ContentView: View {
     
     @State var userInput = ""
     @State var result = ""
+    @State var showAlert = false
     
     var body: some View {
         VStack {
@@ -57,6 +58,9 @@ struct ContentView: View {
             }
         }
         .background(Color.black.ignoresSafeArea())
+        .alert(isPresented: $showAlert) {
+            Alert(title: "Invalid Input", message: userInput, dismissButton: .default(Text("Okay")))
+        }
 }
 
     func buttonColor(cell: String) -> Color {
