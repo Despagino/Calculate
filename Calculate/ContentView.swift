@@ -18,7 +18,7 @@ struct ContentView: View {
         [".", "0", "0.0", "="],
     ]
     
-    let operators = ["/", "+", "%", "X", "-"]
+    let operators = ["/", "+", "%", "X"]
     
     var body: some View {
         VStack {
@@ -61,7 +61,7 @@ struct ContentView: View {
             return .red
         }
         
-        if (operators.contains(cell)) {
+        if (operators.contains(cell) || cell == "-" || cell == "=") {
             return .orange
         }
         return .white
