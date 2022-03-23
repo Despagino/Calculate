@@ -28,7 +28,6 @@ struct ContentView: View {
                     .font(.system(size: 30, weight: .heavy))
             } .frame(maxWidth: .infinity, maxHeight: .infinity)
             
-            
             HStack {
                 Spacer()
                 Text("Hello, world!")
@@ -36,6 +35,16 @@ struct ContentView: View {
                     .foregroundColor(Color.white)
                     .font(.system(size: 40, weight: .heavy))
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            ForEach(grid, id: \.self) { row in
+                ForEach(row, id: \.self) { cell in
+                    Button(action: {
+                        <#code#>
+                    }, label: {
+                        Text("Button")
+                    })
+                }
+            }
             
         }
         .background(Color.black.ignoresSafeArea())
