@@ -103,9 +103,10 @@ struct ContentView: View {
     func addOperator(cell: String) {
         if !userInput.isEmpty {
             let last = String(userInput.last!)
-            if (operators.contains(last) || last = "-") {
+            if (operators.contains(last) || last == "-") {
                 userInput.removeLast()
             }
+            userInput += cell
         }
     }
     
@@ -131,7 +132,7 @@ struct ContentView: View {
     }
     
     func validInput() -> Bool {
-        if (result.isEmpty) {
+        if (userInput.isEmpty) {
             return false
         }
         else {
