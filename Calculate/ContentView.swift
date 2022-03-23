@@ -8,6 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    
+    let grid = [
+        ["AC", "⌫", "%", "/"],
+        ["7", "8", "8", "X"],
+        ["4", "5", "6", "-"],
+        ["1", "2", "3", "+"],
+        [".", "0", "", "="],
+    ]
+    
     var body: some View {
         VStack {
             HStack {
