@@ -16,14 +16,17 @@ struct ContentView: View {
                     .padding()
                     .foregroundColor(Color.white)
                     .font(.system(size: 30, weight: .heavy))
-            }
+            } .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            
             HStack {
                 Spacer()
                 Text("Hello, world!")
                     .padding()
                     .foregroundColor(Color.white)
                     .font(.system(size: 40, weight: .heavy))
-            }
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            
         }
         .background(Color.black.ignoresSafeArea())
 }
