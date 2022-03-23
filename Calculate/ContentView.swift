@@ -15,8 +15,10 @@ struct ContentView: View {
         ["7", "8", "8", "X"],
         ["4", "5", "6", "-"],
         ["1", "2", "3", "+"],
-        [".", "0", "", "="],
+        [".", "0", "0.0", "="],
     ]
+    
+    let operators = ["/", "+", "%", "X", "-"]
     
     var body: some View {
         VStack {
@@ -43,7 +45,7 @@ struct ContentView: View {
                             buttonPressed(cell: cell)
                         }, label: {
                             Text(cell)
-                                .foregroundColor(.white)
+                                .foregroundColor(buttonColor(cell: cell))
                                 .font(.system(size: 40, weight: .heavy))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         })
@@ -54,6 +56,18 @@ struct ContentView: View {
         .background(Color.black.ignoresSafeArea())
 }
 
+    func buttonColor(cell: String) -> Color {
+        if (cell == "AC" || cell == "⌫") {
+            return .red
+        }
+        
+        if (operators.contains(cell)) {
+            return .orange
+        }
+        return .white
+    }
+    
+    
     func buttonPressed(cell: String) {
         
     }
