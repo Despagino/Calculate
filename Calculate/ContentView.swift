@@ -37,19 +37,28 @@ struct ContentView: View {
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
             ForEach(grid, id: \.self) { row in
-                ForEach(row, id: \.self) { cell in
-                    Button(action: {
-                        <#code#>
-                    }, label: {
-                        Text("Button")
-                    })
+                HStack {
+                    ForEach(row, id: \.self) { cell in
+                        Button(action: {
+                            buttonPressed(cell: cell)
+                        }, label: {
+                            Text(cell)
+                                .foregroundColor(.white)
+                                .font(.system(size: 40, weight: .heavy))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        })
+                    }
                 }
             }
-            
         }
         .background(Color.black.ignoresSafeArea())
 }
 
+    func buttonPressed(cell: String) {
+        
+    }
+    
+    
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
