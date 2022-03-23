@@ -20,11 +20,14 @@ struct ContentView: View {
     
     let operators = ["/", "+", "%", "X"]
     
+    @State var userInput = ""
+    @State var result = ""
+    
     var body: some View {
         VStack {
             HStack {
                 Spacer()
-                Text("Hello, world!")
+                Text(userInput)
                     .padding()
                     .foregroundColor(Color.white)
                     .font(.system(size: 30, weight: .heavy))
@@ -32,7 +35,7 @@ struct ContentView: View {
             
             HStack {
                 Spacer()
-                Text("Hello, world!")
+                Text(result)
                     .padding()
                     .foregroundColor(Color.white)
                     .font(.system(size: 40, weight: .heavy))
@@ -70,6 +73,39 @@ struct ContentView: View {
     
     func buttonPressed(cell: String) {
         
+        switch cell {
+        case "AC":
+            userInput = ""
+            result = ""
+            
+        case "⌫":
+            userInput = String(userInput.dropLast())
+            
+        case "=":
+            result = calculateResults()
+            
+        default:
+            userInput += cell
+        }
+        
+    }
+    
+    func calculateResults() -> String {
+        
+        var input = userInput.replacingOccurrences(of: "%", with: "*0.01")
+        input = userInput.replacingOccurrences(of: "X", with: "*")
+        
+        let expression = NSExpression(format: input)
+        let result = expression.expressionValue(with: nil, context: nil) as! Double
+        return formatResult(value: result)
+        
+    }
+    
+    func formatResult(value: Double) -> String {
+        if value.truncatingRemainder(dividingBy: 1) == 0 {
+            return String(format: "%.0f", value)
+        }
+        return String(format: "%.2f", value)
     }
     
     
