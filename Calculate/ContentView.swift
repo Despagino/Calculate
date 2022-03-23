@@ -59,7 +59,7 @@ struct ContentView: View {
         }
         .background(Color.black.ignoresSafeArea())
         .alert(isPresented: $showAlert) {
-            Alert(title: "Invalid Input", message: userInput, dismissButton: .default(Text("Okay")))
+            Alert(title: Text("Invalid Input"), message: Text(userInput), dismissButton: .default(Text("Okay")))
         }
 }
 
@@ -87,11 +87,32 @@ struct ContentView: View {
             
         case "=":
             result = calculateResults()
+        
+        case "-":
+            addMinus()
+            
+        case "X", "/", "%", "+":
+            addOperator(cell: cell)
             
         default:
             userInput += cell
         }
         
+    }
+    
+    func addOperator(cell: String) {
+        if !userInput.isEmpty {
+            let last = String(userInput.last!)
+            if (operators.contains(last) || last = "-") {
+                userInput.removeLast()
+            }
+        }
+    }
+    
+    func addMinus() {
+        if userInput.isEmpty || userInput.last! != "-" {
+            userInput += "-"
+        }
     }
     
     func calculateResults() -> String {
@@ -105,8 +126,8 @@ struct ContentView: View {
             let result = expression.expressionValue(with: nil, context: nil) as! Double
             return formatResult(value: result)
         }
-        return ""
-
+        showAlert = true
+        return  ""
     }
     
     func validInput() -> Bool {
